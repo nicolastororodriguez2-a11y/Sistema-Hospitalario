@@ -4,7 +4,6 @@ package com.hospital.sys.service;
 import com.hospital.sys.model.Medicos;
 import com.hospital.sys.repository.MedicosRepository;
 import java.util.List;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,7 +35,7 @@ public class MedicosService {
         }
         med.setNombre(med.getNombre().trim());
     }
-    public Medicos actualizarMedico(Integer is, Medicos med){
+    public Medicos actualizarMedico(Integer id, Medicos med){
         validarMedico(med);
         Medicos actualOExistente = unMedico(id);
         actualOExistente.setNombre(med.getNombre());
@@ -46,5 +45,10 @@ public class MedicosService {
         actualOExistente.setTelefono(med.getTelefono());
         actualOExistente.setCorreo(med.getCorreo());
         return medicosRepository.save(actualOExistente);
+    }
+
+    
+    public void borrar(Integer id){
+        medicosRepository.delete(unMedico(id));
     }
 }

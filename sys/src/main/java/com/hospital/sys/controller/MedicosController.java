@@ -5,9 +5,11 @@ import com.hospital.sys.model.Medicos;
 import com.hospital.sys.service.MedicosService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,6 +36,13 @@ public class MedicosController {
   public Medicos registrar(@PathVariable Integer id, @RequestBody Medicos med){
       return medicosService.registrarMedico(med);
   }
-  
- 
+  @PutMapping("/actualiza/{id}")
+  public Medicos actualizarMedico(@PathVariable Integer id,@RequestBody Medicos med){
+      return medicosService.actualizarMedico(id, med);
+  } 
+  @DeleteMapping("/eliminar/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void eliminar(@PathVariable Integer id){
+      medicosService.borrar(id);
+  }
 }
