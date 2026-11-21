@@ -23,24 +23,24 @@ public class UsuariosController {
     public UsuariosController(UsuariosService us){
         this.usuariosService =us;
     }
-    @GetMapping("/api/usuarios/ver")
+    @GetMapping("/ver")
     public List<Usuarios> Listar(){
     return usuariosService.ListarUsuarios();
     }
-    @GetMapping("/api/usuarios/ver/{id}")
+    @GetMapping("ver/{id}")
     public Usuarios unUsuario(@PathVariable Integer id){
         return usuariosService.unUsuario(id);
     } 
-    @PostMapping("/api/usuarios/registrar")
+    @PostMapping("/registrar")
     @ResponseStatus(HttpStatus.CREATED)
     public Usuarios regitrar(@RequestBody Usuarios usu){
         return usuariosService.regitrarUsuario(usu);
     }
-    @PutMapping("/api/usuarios/actualizar/{id}")
+    @PutMapping("/actualizar/{id}")
     public Usuarios actualizar(@PathVariable Integer id, @RequestBody Usuarios usu){
         return usuariosService.actualizarUsuario(id, usu);
     }
-    @DeleteMapping("/api/usuarios/eliminar/{id}")
+    @DeleteMapping("/eliminar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Integer id){
         usuariosService.borrar(id);
