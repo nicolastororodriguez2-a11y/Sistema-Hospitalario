@@ -30,21 +30,22 @@ public class AgendamientoService {
         if (age==null || age.getMotivo()== null || age.getMotivo().isBlank()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"el motivo es obligatorio");
         }
-        age.getMotivo(age.getMotivo().trim());
+        age.setMotivo(age.getMotivo().trim());
     }
     public Agendamiento actualizarAgendamiento(Integer id, Agendamiento age){
         validarAgenda(age);
-        Inventario actualOException=unProducto(id);
-        actualOException.setNombre(inv.getNombre());
-        actualOException.setDescripcion(inv.getDescripcion());
-        actualOException.setCantidad(inv.getCantidad());
-        actualOException.setUnidad(inv.getUnidad());
-        actualOException.setFechaRegistro(inv.getFechaRegistro());
-        actualOException.setStockMinimo(inv.getStockMinimo());
-        return inventarioRepository.save(actualOException);
+        Agendamiento actualOException=unAgendamiento(id);
+        actualOException.setEstado(age.getEstado());
+        actualOException.setFecha(age.getFecha());
+        actualOException.setHora(age.getHora());
+        actualOException.setIdAgenda(age.getIdAgenda());
+        actualOException.setMedicoId(age.getMedicoId());
+        actualOException.setPacienteId(age.getPacienteId());
+        actualOException.setMotivo(age.getMotivo());
+        return agendamientoRepository.save(actualOException);
     }
     public void borrar(Integer id){
-        inventarioRepository.delete(unProducto(id));
+        agendamientoRepository.delete(unAgendamiento(id));
     }
 }
-}
+
